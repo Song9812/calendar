@@ -86,6 +86,16 @@ export default function App() {
           )}
         </aside>
 
+        {/* 사이드바 하단 구글 시트 버튼 */}
+        <a
+          className="sheets-link"
+          href="https://docs.google.com/spreadsheets/d/1uIKpU3amR6DkFoIaqBCHE6gYV60zHbJXQeyR9tdPiXU/edit"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          🟩 구글 시트 열기
+        </a>
+
         {/* 우측: 캘린더 */}
         <main className="cal-main">
           <Calendar
