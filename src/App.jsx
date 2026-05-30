@@ -60,7 +60,7 @@ export default function App() {
       <header className="app-header">
         <h1 className="app-title">📅 일정 캘린더</h1>
         {loading && <span className="loading-badge">불러오는 중...</span>}
-        
+        <a
           className="sheets-link"
           href="https://docs.google.com/spreadsheets/d/1uIKpU3amR6DkFoIaqBCHE6gYV60zHbJXQeyR9tdPiXU/edit"
           target="_blank"
