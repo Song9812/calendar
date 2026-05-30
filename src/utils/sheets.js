@@ -2,6 +2,13 @@ const SHEET_ID = '1uIKpU3amR6DkFoIaqBCHE6gYV60zHbJXQeyR9tdPiXU'
 const API_KEY = 'AIzaSyBojEgk-XtVBWMZVP6jc69CwlI5bOP5-rg'
 const BASE_URL = 'https://sheets.googleapis.com/v4/spreadsheets'
 
+// 날짜 형식 정규화 (2026-6-1 → 2026-06-01)
+function normalizeDate(dateStr) {
+  if (!dateStr) return ''
+  const [y, m, d] = dateStr.split('-')
+  return `${y}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`
+}
+
 // 일정 목록 가져오기
 export async function fetchEvents() {
   const url = `${BASE_URL}/${SHEET_ID}/values/Sheet1!A2:F1000?key=${API_KEY}`
@@ -9,9 +16,9 @@ export async function fetchEvents() {
   const data = await res.json()
   if (!data.values) return []
   return data.values.map((row, index) => ({
-    rowIndex: index + 2, // 실제 시트 행 번호 (1행 = 헤더)
-    startDate: row[0] || '',
-    endDate: row[1] || '',
+    rowIndex: index + 2,
+    startDate: normalizeDate(row[0] || ''),
+    endDate: normalizeDate(row[1] || ''),
     title: row[2] || '',
     subject: row[3] || '',
     done: row[4] || 'N',
