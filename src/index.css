@@ -159,7 +159,7 @@ body {
   cursor: pointer;
 }
 
-/* ── 팝업 (사이드바 내부) ── */
+/* ── 팝업 ── */
 .popup-overlay {
   position: fixed;
   inset: 0;
@@ -179,7 +179,7 @@ body {
   border-right: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   box-shadow: 4px 4px 20px rgba(0,0,0,0.1);
-  margin-top: 57px; /* 헤더 높이 */
+  margin-top: 57px;
   animation: slideIn 0.15s ease;
 }
 
@@ -228,7 +228,6 @@ body {
   padding: 10px 14px;
   border-bottom: 1px solid var(--border);
 }
-
 .popup-group:last-child { border-bottom: none; }
 
 .popup-group-label {
@@ -258,21 +257,9 @@ body {
   flex: 1;
 }
 
-.popup-event-title {
-  font-size: 0.85rem;
-  color: var(--text);
-}
-
-.popup-event-range {
-  font-size: 0.72rem;
-  color: var(--text-sub);
-}
-
-.popup-event-memo {
-  font-size: 0.72rem;
-  color: var(--text-sub);
-  font-style: italic;
-}
+.popup-event-title { font-size: 0.85rem; color: var(--text); }
+.popup-event-range { font-size: 0.72rem; color: var(--text-sub); }
+.popup-event-memo { font-size: 0.72rem; color: var(--text-sub); font-style: italic; }
 
 .popup-event-actions {
   display: flex;
@@ -295,10 +282,7 @@ body {
 .btn-delete:hover { background: #FEE2E2; color: #DC2626; border-color: #FCA5A5; }
 
 /* ── 캘린더 ── */
-.calendar {
-  max-width: 900px;
-  margin: 0 auto;
-}
+.calendar { max-width: 900px; margin: 0 auto; }
 
 .cal-header {
   display: flex;
@@ -329,18 +313,8 @@ body {
   gap: 6px;
 }
 
-.cal-year {
-  font-family: var(--font-body);
-  font-size: 1rem;
-  color: var(--text-sub);
-}
-
-.cal-month {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text);
-}
+.cal-year { font-family: var(--font-body); font-size: 1rem; color: var(--text-sub); }
+.cal-month { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--text); }
 
 .cal-today {
   margin-left: auto;
@@ -398,7 +372,6 @@ body {
   padding: 8px 6px;
   cursor: pointer;
   transition: background 0.1s;
-  position: relative;
 }
 .cal-cell:hover { background: #F7F5F0; }
 .cal-cell.empty { cursor: default; background: #F7F5F0; }
@@ -451,4 +424,26 @@ body {
   font-size: 0.65rem;
   color: var(--text-sub);
   padding-left: 5px;
+}
+
+/* ── 구글 시트 버튼 ── */
+.sheets-link {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 6px 14px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--text-sub);
+  text-decoration: none;
+  transition: all 0.15s;
+}
+.sheets-link:hover {
+  background: #E8F5E9;
+  border-color: #4CAF50;
+  color: #2E7D32;
 }
