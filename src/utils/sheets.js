@@ -1,6 +1,7 @@
 const SHEET_ID = '1uIKpU3amR6DkFoIaqBCHE6gYV60zHbJXQeyR9tdPiXU'
 const API_KEY = 'AIzaSyBojEgk-XtVBWMZVP6jc69CwlI5bOP5-rg'
 const BASE_URL = 'https://sheets.googleapis.com/v4/spreadsheets'
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyny0zZuVBBivNWJOyIuQnV1yt0t8rgHiIbATj7GXRrw6PTwjO4D4EONUE_bR-OTgoqKg/exec'
 
 // 날짜 형식 정규화 (2026-6-1 → 2026-06-01)
 function normalizeDate(dateStr) {
@@ -40,51 +41,26 @@ export async function fetchSubjects() {
 
 // 일정 추가
 export async function addEvent(event) {
-  const url = `${BASE_URL}/${SHEET_ID}/values/Sheet1!A:F:append?valueInputOption=USER_ENTERED&key=${API_KEY}`
-  const body = {
-    values: [[
-      event.startDate,
-      event.endDate,
-      event.title,
-      event.subject,
-      'N',
-      event.memo,
-    ]]
-  }
-  const res = await fetch(url, {
+  await fetch(APPS_SCRIPT_URL, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
+    body: JSON.stringify({ action: 'add', ...event }),
   })
-  return res.ok
 }
 
 // 일정 수정
 export async function updateEvent(rowIndex, event) {
-  const url = `${BASE_URL}/${SHEET_ID}/values/Sheet1!A${rowIndex}:F${rowIndex}?valueInputOption=USER_ENTERED&key=${API_KEY}`
-  const body = {
-    values: [[
-      event.startDate,
-      event.endDate,
-      event.title,
-      event.subject,
-      event.done,
-      event.memo,
-    ]]
-  }
-  const res = await fetch(url, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
+  await fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    body: JSON.stringify({ action: 'update', rowIndex, ...event }),
   })
-  return res.ok
 }
 
-// 일정 삭제 (행 내용 지우기)
+// 일정 삭제
 export async function deleteEvent(rowIndex) {
-  const url = `${BASE_URL}/${SHEET_ID}/values/Sheet1!A${rowIndex}:F${rowIndex}:clear?key=${API_KEY}`
-  const res = await fetch(url, { method: 'POST' })
-  return res.ok
+  await fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    body: JSON.stringify({ action: 'delete', rowIndex }),
+  })
 }
 
 // 색상 이름 → CSS 색상값 변환
