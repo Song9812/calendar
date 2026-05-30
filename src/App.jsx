@@ -8,7 +8,7 @@ export default function App() {
   const [events, setEvents] = useState([])
   const [subjects, setSubjects] = useState([])
   const [loading, setLoading] = useState(true)
-  const [popup, setPopup] = useState(null) // { date, events }
+  const [popup, setPopup] = useState(null)
   const [editingEvent, setEditingEvent] = useState(null)
 
   const load = async () => {
@@ -48,7 +48,6 @@ export default function App() {
     await load()
   }
 
-  // 팝업 날짜의 일정을 최신 events로 갱신
   const popupEvents = popup
     ? events.filter(e => {
         const end = e.endDate || e.startDate
@@ -72,7 +71,6 @@ export default function App() {
       </header>
 
       <div className="app-body">
-        {/* 좌측: 입력 폼 */}
         <aside className="sidebar">
           {popup ? (
             <DayPopup
@@ -94,17 +92,6 @@ export default function App() {
           )}
         </aside>
 
-        {/* 사이드바 하단 구글 시트 버튼 */}
-        <a
-          className="sheets-link"
-          href="https://docs.google.com/spreadsheets/d/1uIKpU3amR6DkFoIaqBCHE6gYV60zHbJXQeyR9tdPiXU/edit"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          🟩 구글 시트 열기
-        </a>
-
-        {/* 우측: 캘린더 */}
         <main className="cal-main">
           <Calendar
             events={events}
