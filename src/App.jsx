@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Calendar from './components/Calendar'
 import InputForm from './components/InputForm'
 import DayPopup from './components/DayPopup'
+import TodayPanel from './components/TodayPanel'
 import { fetchEvents, fetchSubjects, addEvent, updateEvent, deleteEvent } from './utils/sheets'
 
 export default function App() {
@@ -48,6 +49,12 @@ export default function App() {
     await load()
   }
 
+  const handleToggleDone = async (event) => {
+    const updated = { ...event, done: event.done === 'Y' ? 'N' : 'Y' }
+    await updateEvent(updated.rowIndex, updated)
+    await load()
+  }
+
   const popupEvents = popup
     ? events.filter(e => {
         const end = e.endDate || e.startDate
@@ -60,7 +67,7 @@ export default function App() {
       <header className="app-header">
         <h1 className="app-title">📅 일정 캘린더</h1>
         {loading && <span className="loading-badge">불러오는 중...</span>}
-        <a
+        
           className="sheets-link"
           href="https://docs.google.com/spreadsheets/d/1uIKpU3amR6DkFoIaqBCHE6gYV60zHbJXQeyR9tdPiXU/edit"
           target="_blank"
@@ -99,6 +106,14 @@ export default function App() {
             onDayClick={handleDayClick}
           />
         </main>
+
+        <aside className="today-sidebar">
+          <TodayPanel
+            events={events}
+            subjects={subjects}
+            onToggleDone={handleToggleDone}
+          />
+        </aside>
       </div>
     </div>
   )
