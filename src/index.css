@@ -452,3 +452,121 @@ body {
   border-color: #4CAF50;
   color: #2E7D32;
 }
+
+/* ── 오늘 일정 사이드바 ── */
+.today-sidebar {
+  width: 220px;
+  min-width: 200px;
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  overflow-y: auto;
+}
+
+.today-panel {
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.today-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.today-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.today-date {
+  font-size: 0.75rem;
+  color: var(--text-sub);
+}
+
+.today-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.today-progress-bar {
+  flex: 1;
+  height: 5px;
+  background: var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.today-progress-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+.today-progress-text {
+  font-size: 0.7rem;
+  color: var(--text-sub);
+  white-space: nowrap;
+}
+
+.today-empty {
+  font-size: 0.82rem;
+  color: var(--text-sub);
+  text-align: center;
+  padding: 20px 0;
+}
+
+.today-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.today-group-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-bottom: 2px;
+  display: inline-block;
+}
+
+.today-event {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 4px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.today-event:hover { background: var(--bg); }
+
+.today-checkbox {
+  font-size: 1rem;
+  color: var(--text-sub);
+  flex-shrink: 0;
+}
+
+.today-event-title {
+  font-size: 0.82rem;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.today-event.done .today-event-title {
+  text-decoration: line-through;
+  color: var(--text-sub);
+}
+
+.today-event.done .today-checkbox {
+  color: var(--accent);
+}
